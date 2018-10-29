@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>echarts</title>
+</head>
+<body>
+<div>
+	<div id="line" style="height:400px;width:50%;float:left;"></div>
+	<div id="bar" style="height:400px;width:50%;float:right;"></div>
+</div>
+<script src="js/echarts.js"></script>
+<script>
+        var myChart = echarts.init(document.getElementById('line'));
+        option = {
+			 title: {
+				text: '七日耗电量',
+				left: 'center'
+			},
+			xAxis: {
+				type: 'category',
+				data: ['1', '2', '3', '4', '5', '6', '7']
+			},
+			yAxis: {
+				type: 'value'
+			},
+			series: [{
+				data: [52, 79, 80, 45, 65, 76, 87],
+				type: 'line'
+			}]
+		};
+
+        myChart.setOption(option);
+		
+		
+		var myChart1 = echarts.init(document.getElementById('bar'));
+		option1 = {
+			title: {
+				text: '当日各专业耗电量',
+				left: 'center'
+			},
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'shadow'
+				}
+			},
+			
+			grid: {
+				left: '3%',
+				right: '4%',
+				bottom: '3%',
+				containLabel: true
+			},
+			xAxis: {
+				type: 'value',
+				boundaryGap: [0, 0.01]
+			},
+			yAxis: {
+				type: 'category',
+				data: ['其他','空调','排水','照明']
+			},
+			series: [
+				{
+					type: 'bar',
+					 barWidth : 30,
+					data: [120, 24, 80, 30],
+					itemStyle: {  
+						normal:{  
+							color: function (params){
+								var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','rgb(195,229,235)'];
+								return colorList[params.dataIndex];
+							}
+						},
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}
+			]
+		};
+		myChart1.setOption(option1);
+</script>
+</body>
+</html>
